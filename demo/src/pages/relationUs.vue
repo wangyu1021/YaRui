@@ -18,7 +18,9 @@
         </div>
       </div>
       <div class="conten-b">
-        <div class="shuan">sc</div>
+        <div class="shuan" style="width:100%; height:100%;" >
+          <maps/>
+        </div>
         <div class="shuan">
           <div class="inputs">
             <h2 style="margin-left:20px;">保持联系</h2>
@@ -50,6 +52,7 @@
 </template>
 
 <script>
+import maps from "../pages/baidu/map"
 export default {
   data() {
     return {
@@ -63,6 +66,9 @@ export default {
         { name: "地址：广东省深圳市龙城街道1号彩云路新潮工业区4号楼518172" }
       ]
     };
+  },
+  components:{
+    maps
   }
 };
 </script>
@@ -93,7 +99,8 @@ export default {
 }
 .shuan {
   height: 100%;
-  width: 80%;
+  width: 100%;
+  overflow: hidden;
 }
 .texts {
   height: 100%;
