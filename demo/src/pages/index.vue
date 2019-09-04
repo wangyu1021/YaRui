@@ -62,9 +62,13 @@
         </div>
         <div class="main-list">
           <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024530537.png" alt="">
+          <h5>非常棒的服务</h5>
+          <p>专业的客户服务24小时在线为您解决任何问题</p>
         </div>
         <div class="main-list">
           <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024545396.png" alt="">
+          <h5> 专业制造商</h5>
+          <p>拥有经验丰富的设计，研究和生产团队的专业生长灯具制造商。</p>
         </div>
       </div>
 
@@ -76,7 +80,7 @@
           <h6>请及时与我们联系，我们会有人来处理。</h6>
         </div>
         <div class="link" style="line-height: 140px;margin-top: 58px;">
-          <a href="javascript">联系我们 &nbsp;+</a>
+          <router-link to="/relationUs">联系我们 &nbsp;+</router-link>
         </div>
       </div>
     </div>
@@ -199,9 +203,7 @@ export default {
   a {
     display: block;
     height: 186px;
-    width: 170px;
-
-    // &:hover {
+    width: 170px; // &:hover {
     //   background-color: #5DB661;
     //   p {
     //     color: #fff
@@ -255,6 +257,8 @@ export default {
       margin: 20px 40px;
       line-height: 24px;
     }
+    &:hover h5{color: #5DB661 }
+    &:hover p{color: #5DB661 }
   }
 }
 
