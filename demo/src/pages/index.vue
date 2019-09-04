@@ -1,23 +1,35 @@
 <template>
   <div class="home">
     <div class="trotting-img">
-      <el-carousel indicator-position="outside" height="500px"> 
+      <el-carousel indicator-position="outside" height="548px">
         <el-carousel-item v-for="(item,index) in carouselList" :key="index">
-          <img width="100%" height="100%" :src="item.img" alt />
+          <img :src="item.imageAddress" alt="">
         </el-carousel-item>
       </el-carousel>
     </div>
     <div class="content-al">
+
       <div class="wrap flex">
         <div class="wrap-list">
-          <a href="javascript">
-           <img  src="">
+          <a class="list1" href="javascript">
             <p>补光灯</p>
-           </a>
-       </div>
-        <div class="wrap-list"></div>
-        <div class="wrap-list"></div>
-        <div class="wrap-list"></div>
+          </a>
+        </div>
+        <div class="wrap-list">
+          <a class="list2" href="javascript">
+            <p>促进增长</p>
+          </a>
+        </div>
+        <div class="wrap-list">
+          <a class="list3" href="javascript">
+            <p>节能</p>
+          </a>
+        </div>
+        <div class="wrap-list">
+          <a class="list4" href="javascript">
+            <p>双赢的好处</p>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -34,10 +46,8 @@
       <div style="width:1150px;overflow: hidden;margin:auto">
         <ul class="content-category-con-r" :style="sliderValue">
           <li class="product_item" v-for="(item,index) in productList" :key="index">
-            <img
-              src="http://www.cn-hydroponics.com/uploadfile/2018/0116/20180116040404291.jpg "
-              alt
-            />
+            <img src="http://www.cn-hydroponics.com/uploadfile/2018/0116/20180116040404291.jpg " alt="">
+
           </li>
         </ul>
       </div>
@@ -46,17 +56,18 @@
     <div class="main-con">
       <div class="main-box flex">
         <div class="main-list">
-          <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024507603.png" alt />
+          <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024507603.png" alt="">
           <h5>质量保证</h5>
           <p>每个生产细节都有专业的质量控制。</p>
         </div>
         <div class="main-list">
-          <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024530537.png" alt />
+          <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024530537.png" alt="">
         </div>
         <div class="main-list">
-          <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024545396.png" alt />
+          <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024545396.png" alt="">
         </div>
       </div>
+
     </div>
     <div class="main-bottom">
       <div class="txt flex">
@@ -74,25 +85,13 @@
 
 <script>
 export default {
+
   data() {
     return {
       currIndex: 0,
       productList: [{}, {}, {}, {}, {}, {}],
-      carouselList: [
-        {
-          img:
-            "http://cn.cn-hydroponics.com/uploadfile/2018/0122/20180122053719604.jpg"
-        },
-        {
-          img:
-            "http://cn.cn-hydroponics.com/uploadfile/2018/0118/20180118100014303.jpg"
-        },
-        {
-          img:
-            "http://cn.cn-hydroponics.com/uploadfile/2018/0122/20180122060035138.jpg"
-        }
-      ]
-    };
+      carouselList: []
+    }
   },
   computed: {
     sliderValue() {
@@ -100,31 +99,47 @@ export default {
     }
   },
   mounted() {
-    // let that = this
-    // this.$axios.get('http://orcahrd.natapp1.cc/YaRui/enterprise/findInformation.do')
-    //   .then(function(res) {
-    //     console.log(res.data)
-    //     that.listday = res.data.dynamicList
-    //   })
+    let that = this
+
+    this.$axios.get('http://orcahrd.natapp1.cc/YaRui/index/findShuffling.do')
+      .then(function(res) {
+        console.log(res.data.shuffling)
+        that.carouselList = res.data.shuffling
+      })
+
   },
   methods: {
     toTeft() {
       if (this.currIndex > 0) {
         this.currIndex--;
       }
+
     },
     toRight() {
-      const length = this.productList.length;
+      const length = this.productList.length
       if (this.currIndex < length - 1) {
         this.currIndex++;
       }
+
+
+
     }
   }
-};
+}
 </script>
 
 
 <style scoped lang="less">
+@keyframes mymove {
+  from {
+    opacity: 0;
+    transform: translateY(150px)
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px)
+  }
+}
 
 .product_item {
   width: 270px;
@@ -152,17 +167,18 @@ export default {
   }
 }
 
-
 .el-carousel__item:nth-child(2n) {
   background-color: #99a9bf;
 }
 
-.el-carousel__item:nth-child(2n + 1) {
+.el-carousel__item:nth-child(2n+1) {
   background-color: #d3dce6;
 }
+
 .el-carousel .el-carousel__container {
   height: 548px;
 }
+
 
 .content-al {
   width: 1200px;
@@ -170,26 +186,47 @@ export default {
 }
 
 .wrap-list {
-  width: 173px;
+  width: 170px;
   text-align: center;
-  height: 202px;
+  height: 186px;
   margin: 28px 63px;
   transition: 0.1s;
-  border: 1px solid red;
   p {
+    padding: 125px 0 0 0;
     font-size: 18px;
     color: #666666;
   }
+  a {
+    display: block;
+    height: 186px;
+    width: 170px;
+
+    // &:hover {
+    //   background-color: #5DB661;
+    //   p {
+    //     color: #fff
+    //   }
+    // }
+  }
+  .list3 {
+    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_05.jpg) no-repeat center 31px;
+  }
 
 
-    &:hover {
-      background-color: #5db661;
-      p { 
-        color: #fff;
-      }
-    }
-  
+  .list1 {
+    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_03.jpg) no-repeat center 31px;
+    z-index: 999;
+  }
+
+  .list2 {
+    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_13.jpg) no-repeat center 31px;
+  }
+
+  .list4 {
+    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_11.jpg) no-repeat center 31px;
+  }
 }
+
 
 .main-con {
   height: 450px;
@@ -201,6 +238,8 @@ export default {
     background-color: #fff;
     margin: 0 15px;
     text-align: center;
+    animation-name: mymove;
+    animation-duration: .8s;
     img {
       margin-top: -47px;
     }
@@ -224,6 +263,7 @@ export default {
   margin: auto;
 }
 
+
 .main-bottom {
   height: 140px;
   background: #5db661;
@@ -234,6 +274,8 @@ export default {
     height: 112px;
     padding-left: 84px;
     background: url(../assets/imgs/question_03.jpg) no-repeat left 45px;
+    animation-name: mymove;
+    animation-duration: .8s;
     p {
       display: block;
       font-size: 18px;
@@ -245,6 +287,7 @@ export default {
     }
   }
 }
+
 
 .link a {
   font-size: 18px;
