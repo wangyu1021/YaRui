@@ -8,8 +8,10 @@ const Product = resolve => require(["../pages/product.vue"], resolve);
 const RelationUs = resolve => require(["../pages/relationUs.vue"], resolve);
 const Index = resolve => require(["../pages/index.vue"], resolve);
 const Login = resolve => require(["../pages/login.vue"], resolve);
-import newss from '../pages/News/newss.vue'
-import newsss from '../pages/News/newsss.vue'
+const ProductDetails = resolve => require(["../pages/product/productDetails.vue"], resolve);
+const newss = resolve => require(["../pages/News/newss.vue"], resolve);
+const newsss = resolve => require(["../pages/News/newsss.vue"], resolve);
+
 Vue.use(Router);
 
 export default new Router({
@@ -53,7 +55,12 @@ export default new Router({
             name: "Login",
             component: Login
         },
-        {path:"/newss",name:"newss",component:newss},
-        {path:"/newsss",name:"newss",component:newsss},
+        {
+            path: "/productDetails",
+            name: "ProductDetails",
+            component: ProductDetails
+        },
+        { path: "/newss", name: "newss", component: newss },
+        { path: "/newsss", name: "newss", component: newsss },
     ]
 });
