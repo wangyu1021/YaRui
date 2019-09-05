@@ -124,9 +124,6 @@ export default {
       if (this.currIndex < length - 1) {
         this.currIndex++;
       }
-
-
-
     }
   }
 }
