@@ -4,8 +4,14 @@
       <div class="logo">
         <img src="../assets/imgs/coco.jpg" />
       </div>
-
+      
       <div class="ge">
+        
+        <router-link class="login" to="/login">登录</router-link>
+        <router-link class="login" to="/register">注册</router-link>
+
+
+       
         <img src="../assets/imgs/te.jpg" />
         <a>0755-89568384</a>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
         <img src="../assets/imgs/ojb.jpg" />&nbsp;&nbsp;&nbsp;
@@ -14,6 +20,7 @@
         <img src="../assets/imgs/obk.jpg" />&nbsp;&nbsp;&nbsp;
         <a>ENGLISH</a>
       </div>
+    
       <div class="ro">
         <input type="tet" />
       </div>
@@ -32,6 +39,9 @@ export default {};
 </script>
 
 <style scoped>
+.login{
+  margin-right: 10px;
+}
 .coco {
   /* width: 1366px; */
   height: 90px;
@@ -40,6 +50,7 @@ export default {};
   width: 1200px;
   margin: 0 auto;
   height: 90px;
+
 }
 .logo {
   width: 62px;
@@ -49,9 +60,10 @@ export default {};
 }
 .ge {
   width: 560px;
-  height: 19px;
+  height: 30px;
   float: right;
   margin-top: 10px;
+
 }
 #ee {
   margin-top: 10px;

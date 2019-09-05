@@ -2,7 +2,7 @@
   <div class="box">
     <div class="box_a" v-for="item in boxList" :key="item.id">
       <div class="box_a-">
-        <router-link to="/newss">
+        <router-link to="/Home/newss">
           <img
             width="86%"
             class="ar"
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="box_a-" v-for="item in boxLists" :key="item.id">
-        <router-link to="/newsss">
+        <router-link to="/Home/newsss">
           <img
             width="100%"
             src="http://www.cn-hydroponics.com/uploadfile/2017/1216/20171216013721970.jpg"

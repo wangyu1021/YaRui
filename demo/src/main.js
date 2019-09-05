@@ -10,7 +10,7 @@ import axios from '../node_modules/axios'
 
 import BaiduMap from 'vue-baidu-map'
 Vue.use(BaiduMap, {
-    ak: 'NGtxiR9qf5gQBFG3IogfCufuqtFFTMqp' //官方提供的ak秘钥
+    ak: '' //官方提供的ak秘钥
 })
 
 Vue.use(ElementUI);

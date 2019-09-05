@@ -1,29 +1,18 @@
 <template>
   <div id="app">
-    <Head></Head>
-    <Navigation></Navigation>
-    <router-view/>
-    <Foot></Foot>
+    <router-view />
   </div>
 </template>
 
 <script>
-import Head from './components/head'
-import Foot from './components/foot'
-import Navigation from './components/navigation'
 export default {
-  name: 'App',
-    components: {
-    Head,
-    Foot,
-    Navigation
-  }
-}
+  name: "App"
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -33,7 +22,6 @@ export default {
   padding: 0;
   box-sizing: border-box;
   list-style-type: none;
-  text-decoration:none;
+  text-decoration: none;
 }
-
 </style>

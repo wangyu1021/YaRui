@@ -13,34 +13,34 @@
 <script>
 export default {
     data() {
-        return {
-            routerList: [{
-                routerName: '首页',
-                routerUrl: '/'
-            },
-            {
-                routerName: '关于我们',
-                routerUrl: '/about'
-            },
-            {
-                routerName: '产品中心',
-                routerUrl: '/product'
-
-            },
-            {
-                routerName: '新闻中心',
-                routerUrl: '/news'
-
-            },
-            {
-                routerName: '加入我们',
-                routerUrl: '/joinUs'
-            },
-            {
-                routerName: '联系我们',
-                routerUrl: '/relationUs'
-            }]
+     return {
+      routerList: [
+        {
+          routerName: "首页",
+          routerUrl: "/Home/index"
+        },
+        {
+          routerName: "关于我们",
+          routerUrl: "/Home/about"
+        },
+        {
+          routerName: "产品中心",
+          routerUrl: "/Home/product"
+        },
+        {
+          routerName: "新闻中心",
+          routerUrl: "/Home/news"
+        },
+        {
+          routerName: "加入我们",
+          routerUrl: "/Home/joinUs"
+        },
+        {
+          routerName: "联系我们",
+          routerUrl: "/Home/relationUs"
         }
+      ]
+    };
 
     },
     methods: {

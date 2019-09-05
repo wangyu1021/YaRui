@@ -1,12 +1,17 @@
 <template>
   <div class="mapbox">
-    <baidu-map :center="center" :zoom="zoom" :scroll-wheel-zoom="true" style="height:100vh" @ready="handler" @click="getClickInfo" >
-      <!-- 必须给容器指高度，不然地图将显示在一个高度为0的容器中，看不到 -->
+    <baidu-map
+      :center="center"
+      :zoom="zoom"
+      :scroll-wheel-zoom="true"
+      style="height:100vh"
+      @ready="handler"
+      @click="getClickInfo"
+    >
       <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
       <bm-geolocation anchor="BMAP_ANCHOR_BOTTOM_RIGHT" :showAddressBar="true" :autoLocation="true"></bm-geolocation>
       <bm-city-list anchor="BMAP_ANCHOR_TOP_LEFT"></bm-city-list>
     </baidu-map>
-    <!-- 因为我采用的是全局注册，所以不用再在该页面上注册components -->
   </div>
 </template>
 <script>
@@ -14,8 +19,8 @@ export default {
   name: "mapbox",
   data() {
     return {
-      center: { lng: 0, lat: 0 }, //经纬度
-      zoom: 13 //地图展示级别
+      center: { lng: 0, lat: 0 },
+      zoom: 13 
     };
   },
   methods: {

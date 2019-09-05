@@ -23,7 +23,7 @@
       <div class="list-btn">
         <div class="btn-yue" style="background-color: #4CB050;">
           <div class="next">
-            <router-link style="display: inline-block;width: 270px;" to="/joinUsCatid">阅读更多</router-link>
+            <router-link style="display: inline-block;width: 270px;" to="/Home/joinUsCatid">阅读更多</router-link>
           </div>
         </div>
         <div class="btn-yue" style="background-color: #666666;">

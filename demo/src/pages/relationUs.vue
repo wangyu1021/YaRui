@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import maps from "../pages/baidu/map"
+import maps from "../pages/apis/map"
 export default {
   data() {
     return {
