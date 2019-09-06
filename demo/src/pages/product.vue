@@ -67,28 +67,32 @@ export default {
         .get("http://orcahrd.natapp1.cc/YaRui/product/findProductCenter.do")
         .then(res => {
           this.arr = res.data.productCenterList;
-          for (let i of this.arr) {
+          for (let i of this.arr) {  //循环分类列表
           }
-          for (let y of this.arr) {
-            this.arrone.unshift(y.id);
+          for (let y of this.arr) {  //循环商品id
+            this.arrone.unshift(y.id);  //想要拿到数据得话必须要获取到对应得id
           }
-          if (index == 0) {
+          if (index == 0) { //通过index判断是点击的哪一个 
             const _this = this;
-            this.newuser.id = this.arrone[5];
-            this.push=this.arr[0]
-            this.newuser.pageCurrent = this.num
+            this.newuser.id = this.arrone[5]; //通过id获取商品信息
+            this.push=this.arr[0]  //面包屑导航栏
+            this.newuser.pageCurrent = this.num //页码，默认为第一页
             this.$axios.get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
-                    pageCurrent: this.newuser.pageCurrent,
-                    id: this.newuser.id
+                    pageCurrent: this.newuser.pageCurrent,  //页码默认获取到第一页得商品信息
+                    id: this.newuser.id //把获取到得id传到后台以便获取到商品信息
                   }
                 }
               )
               .then(res => {
-                this.obje = res.data.data.records;
+                this.obje = res.data.data.records;  //打点拿到数据
                 console.log(res.data.data.records);
               });
-          } else if (index == 1) {
+          } 
+          
+          
+      
+          else if (index == 1) {
             this.newuser.id = this.arrone[4];
             this.push=this.arr[1]
             this.newuser.pageCurrent =  this.num
@@ -104,7 +108,12 @@ export default {
                 this.obje = res.data.data.records;
                 console.log(res.data.data.records);
               });
-          } else if (index == 2) {
+          } 
+          
+          
+          
+          
+          else if (index == 2) {
              this.newuser.id = this.arrone[3];
              this.push=this.arr[2]
             this.newuser.pageCurrent =  this.num
@@ -120,7 +129,11 @@ export default {
                 this.obje = res.data.data.records;
                 console.log(res.data.data.records);
               });
-          } else if (index == 3) {
+          }
+          
+          
+          
+          else if (index == 3) {
              this.newuser.id = this.arrone[2];
              this.push=this.arr[3]
             this.newuser.pageCurrent =  this.num
@@ -136,7 +149,12 @@ export default {
                 this.obje = res.data.data.records;
                 console.log(res.data.data.records);
               });
-          } else if (index == 4) {
+          } 
+          
+          
+          
+          
+          else if (index == 4) {
             this.newuser.id = this.arrone[1];
             this.push=this.arr[4]
             this.newuser.pageCurrent =  this.num
@@ -152,7 +170,12 @@ export default {
                 this.obje = res.data.data.records;
                 console.log(res.data.data.records);
               });
-          } else {
+          }
+          
+          
+          
+          
+          else {
              this.newuser.id = this.arrone[0];
              this.push=this.arr[5]
             this.newuser.pageCurrent =  this.num
@@ -175,6 +198,11 @@ export default {
           console.log("错误");
         });
     },
+   //获取商品详情代码  --end
+
+
+
+    //点击显示隐藏代码
     dianji:function(){
     	this.$store.state.count=true
     },

@@ -25,23 +25,24 @@
           <div class="inputs">
             <h2 style="margin-left:20px;">保持联系</h2>
             <div class="in">
-              <input type="text" placeholder="name" />
+              <input type="text" placeholder="  name" />
             </div>
             <div class="in">
-              <input type="text" placeholder="email" />
+              <input type="text" placeholder=" email" />
             </div>
             <div class="in">
-              <input type="text" placeholder="phone" />
+              <input type="text" placeholder=" phone" />
             </div>
             <div class="in">
-              <input type="text" placeholder="countoy" />
+              <input type="text" placeholder=" countoy" />
             </div>
             <div class="in">
-              <input type="text" placeholder="your Message" />
+              <input type="text" placeholder=" your Message" />
             </div>
             <input
               type="button"
-              style=" background: rgb(79, 146, 79); color:#fff;  width:200px;"
+ 
+              style=" background: rgb(79, 146, 79); color:#fff;  width:200px; line-height:1px;"
               value="确认"
             />
           </div>
@@ -76,7 +77,7 @@ export default {
 <style scoped>
 .us {
   background: url("http://www.cn-hydroponics.com/statics/huidaxin/images/contact-bg_02.jpg");
-  margin: 0px 20px 0 0;
+  margin: -16px 0px 0 0;
   height: 690px;
   display: flex;
   align-items: center;
@@ -88,7 +89,7 @@ export default {
   display: flex;
 }
 .conten-a {
-  flex: 1;
+  flex: 2;
   display: flex;
   align-items: center;
 }
@@ -101,6 +102,7 @@ export default {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  border-radius: 8px;
 }
 .texts {
   height: 100%;
@@ -111,7 +113,7 @@ export default {
   color: aliceblue;
  }
 .inputs {
-  margin-left: 10px;
+  /* margin-left: 10px; */
   line-height: 60px;
   background: white;
   height: 100%;
@@ -119,10 +121,11 @@ export default {
 .inputs input {
   width: 300px;
   height: 40px;
-  border-radius: 20px;
+  border-radius: 10px;
   background: rgba(234, 238, 241, 0.5);
   margin-left: 20px;
   margin-top: 20px;
   outline: none;
+  border: none;
 }
 </style>
