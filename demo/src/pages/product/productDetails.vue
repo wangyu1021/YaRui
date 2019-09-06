@@ -118,6 +118,8 @@ export default {
                 overflow: hidden;
                 float: left;
                 margin-top: 65px;
+                transition: all 2s;
+                -webkit-transition: all 1s;
                 li {
                     width: 168px;
                     height: 144px;

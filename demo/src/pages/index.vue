@@ -43,7 +43,7 @@
       <div class="to_right slider_icon flex flex-vc flex-hc" @click="toRight()">
         <a class="sNext" href="javascript:void(0)"></a>
       </div>
-      <div style="width:1150px;overflow: hidden;margin:auto">
+      <div style="width:1150px;overflow: hidden;margin:30px auto">
         <ul class="content-category-con-r" :style="sliderValue">
           <li class="product_item" v-for="(item,index) in productList" :key="index">
            <img :src="item.image" alt="">
@@ -194,6 +194,7 @@ export default {
 
 .trotting-img {
   width: 100%;
+  text-align: center;
 }
 
 .el-carousel__item {
