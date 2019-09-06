@@ -97,7 +97,7 @@ export default {};
   width: 68px;
   height: 77px;
   position: absolute;
-  margin-left: 1100px;
+  margin-left: 1145px;
 }
 #cei img {
   width: 68px;

@@ -8,6 +8,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from '../node_modules/axios'
 
+import store from './store'
+
 import BaiduMap from 'vue-baidu-map'
 Vue.use(BaiduMap, {
     ak: '' //官方提供的ak秘钥
@@ -22,6 +24,7 @@ Vue.config.productionTip = false
 new Vue({
     el: '#app',
     router,
+    store,
     components: { App },
     template: '<App/>'
 })
