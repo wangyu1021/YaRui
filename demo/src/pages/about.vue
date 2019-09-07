@@ -106,6 +106,9 @@ export default {
 
 
 <style scoped>
+.Img{
+  overflow: hidden;
+}
 .about {
   font-size: 18px;
   color: rgb(66, 66, 66);
