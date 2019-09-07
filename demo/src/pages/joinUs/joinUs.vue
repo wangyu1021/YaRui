@@ -12,13 +12,13 @@
     <div class="list flex">
       <div class="list-text">
         <p>薪酬：
-          <span>$ 8000-10,000</span>
+          <span>$ {{arr.minSalary}}-{{arr.maxSalary}}</span>
           <span>- 发布时间
-            <span class="bk-gray">DEC-16-2017</span>
+            <span class="bk-gray">{{utils.transformTime(arr.createdTime)}}</span>
           </span>
         </p>
-        <p class="clerk">OFFICE CLERK /接受新鲜的毕业生</p>
-        <p>负责各种计算机文件的编号，打印，排版和归档; 收集和安排更好地执行和实施的声明; 协调会议室预订并合理安排你</p>
+        <p class="clerk">{{arr.title}}</p>
+        <p>{{arr.content}}</p>
       </div>
       <div class="list-btn">
         <div class="btn-yue" style="background-color: #4CB050;">
@@ -27,7 +27,9 @@
           </div>
         </div>
         <div class="btn-yue" style="background-color: #666666;">
-          <div class="jia"><router-link style="display: inline-block;width: 270px;" to=''>工作申请</router-link></div>
+          <div class="jia">
+            <router-link style="display: inline-block;width: 270px;" to=''>工作申请</router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -39,6 +41,24 @@
 export default {
   data() {
     return {
+      joinlist: [],
+      arr:{}
+    }
+  },
+  mounted() {
+    this.getTabList()
+  },
+  methods: {
+    getTabList() {
+      let that = this
+      this.$axios.get('http://orcahrd.natapp1.cc/YaRui/recruitments/findRecruitment.do')
+        .then(function(res) {
+          that.joinlist = res.data.data
+          console.log(res.data.data, 'res.data')
+          for (let i of that.joinlist) {
+            that.arr = i
+          }
+        })
     }
   }
 }
@@ -85,12 +105,16 @@ export default {
         .next {
           background: url(../../assets/imgs/join_03.jpg) no-repeat;
           background-position: 240px 15px;
-          a{color: #fff;}
+          a {
+            color: #fff;
+          }
         }
         .jia {
           background: url(../../assets/imgs/join_07.jpg) no-repeat;
           background-position: 235px 15px;
-           a{color: #fff;}
+          a {
+            color: #fff;
+          }
         }
       }
     }

@@ -7,16 +7,18 @@ import './assets/style/flex.css';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from '../node_modules/axios'
-
 import store from './store'
+import utils from './pages/util/commin'
 
 import BaiduMap from 'vue-baidu-map'
+
 Vue.use(BaiduMap, {
     ak: '' //官方提供的ak秘钥
 })
 
 Vue.use(ElementUI);
 Vue.prototype.$axios = axios;
+Vue.prototype.utils = utils
 
 Vue.config.productionTip = false
 
