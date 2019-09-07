@@ -74,7 +74,6 @@ export default {
 
 .content {
     margin: auto;
-    width: 100%;
 }
 
 .content ul li:hover {
