@@ -24,16 +24,23 @@ export default {
     }
   },
   methods: {
-    // async login(){
-    //  const res = await this.$https.post("login",this.model)
+    async login(){
+     const res = await this.$axios.post("http://orcahrd.natapp1.cc/YaRui/user/doRegister.do",this.model)
+    
+     
+
+
+
     //  localStorage.token = res.data.token
+    console.log(res)
     //  this.$router.push("/")
     //  this.$message({
     //      type:"success",
     //      message:"登陆成功"
     //  })
+   
 
-    // }
+    }
   }
 }
 </script>

@@ -1,18 +1,24 @@
 <template>
     <div class="main-details">
-        <div class="ios-nav"></div>
-        <h4>OE-CMH630W生长灯具</h4>
+        <div class="ios-nav">
+        	<ul>
+        		<li><router-link :to="{name:'Index'}" tag="a">首页 > </router-link></li>
+				<li><router-link :to="{name:'Product'}" tag="a">产品中心 > </router-link></li>
+				<li>{{arrone}}</li>
+        	</ul>
+        </div>
+      <h4>{{arr.introduction}}</h4>
         <div class="pro-detail-con flex flex-hs">
             <div class="detail-le">
-                <img src="http://www.cn-hydroponics.com/uploadfile/2018/0119/20180119032622715.jpg">
+              <img :src="arr.image" />
             </div>
             <div class="detail-ri">
                 <div class="detail-top" @click="toTop()"></div>
                 <div class="detail-main" :style="slider">
                     <ul>
-                        <li v-for="(item,index) in detaillist" :key="index">
-                            <img :src="item.image" alt="">
-                        </li>
+                        <li><img :src="arr.image"></li>
+                        <li><img :src="arr.image"</li>
+                        <li><img :src="arr.image"</li>
                     </ul>
                 </div>
                 <div class="detail-bott" @click="toBottom()"></div>
@@ -26,7 +32,7 @@
                 <span>CMH950W生长灯具</span>
             </p>
             <div class="tbody-im">
-                <img src="http://www.cn-hydroponics.com/uploadfile/2018/0119/20180119032622715.jpg">
+                <img :src="arr.image" />
             </div>
         </div>
         <div class="detail">
@@ -39,8 +45,28 @@ export default {
     data() {
         return {
             detailIndex: 0,
-            detaillist: [{}, {}, {}]
+            detaillist: [{}, {}, {}],
+        	obje:{},
+        	arr:{
+        	image:null,
+        	introduction:null,
+        	},
+        	name:{},
         }
+    },
+    mounted(){
+   	if(location.href.indexOf('#reloaded')==-1){
+    location.href=location.href+"#reloaded";
+    location.reload();
+    }
+    	this.obje=JSON.parse(localStorage.getItem("details"))
+    	this.name=JSON.parse(localStorage.getItem("nameone"))
+    	this.arr=this.obje
+    	this.arrone=this.name
+        console.log("执行了")	
+    	
+    		
+    	
     },
     methods: {
         toTop() {
@@ -54,13 +80,14 @@ export default {
             if (this.detailIndex < length - 1) {
                 this.detailIndex++;
             }
-        }
+        },
     },
     computed: {
         slider() {
             return "transform:translateY(" + -(this.detailIndex * 144) + "px)";
         }
-    }
+    },
+  
 
 }
 </script>
@@ -72,7 +99,6 @@ export default {
     padding-bottom: 40px;
     .ios-nav {
         height: 90px;
-        border: 1px solid #E21918;
     }
     h4 {
         font-size: 30px;
@@ -118,6 +144,8 @@ export default {
                 overflow: hidden;
                 float: left;
                 margin-top: 65px;
+                transition: all 2s;
+                -webkit-transition: all 1s;
                 li {
                     width: 168px;
                     height: 144px;
@@ -159,4 +187,6 @@ export default {
         font-size: 12px;
     }
 }
+.ios-nav ul{display: flex;line-height:90px;}
+.ios-nav li a{color: black;}
 </style>

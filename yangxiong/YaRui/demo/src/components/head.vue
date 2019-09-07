@@ -24,9 +24,6 @@
       <div class="ro">
         <input type="tet" />
       </div>
-      <div class="tee">
-        <img src="../assets/imgs/see.jpg" />
-      </div>
       <div id="cei">
         <img src="../assets/imgs/code_ewm.png" />
       </div>
@@ -63,6 +60,7 @@ export default {};
   height: 30px;
   float: right;
   margin-top: 10px;
+  font-size:13px;
 
 }
 #ee {
@@ -85,6 +83,9 @@ export default {};
   border: none;
   outline: none;
   margin-top: 10px;
+  background-image: url(../assets/imgs/see.jpg);
+  background-repeat: no-repeat;
+  background-position:91% 49%;
 }
 .tee {
   float: right;
@@ -97,11 +98,11 @@ export default {};
   width: 68px;
   height: 77px;
   position: absolute;
-  margin-left: 1100px;
+  margin-left: 1145px;
 }
 #cei img {
   width: 68px;
-  height: 77px;
+  height: 68px;
   margin-top: 5px;
 }
 </style>

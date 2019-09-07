@@ -3,7 +3,7 @@
     <div class="trotting-img">
       <el-carousel indicator-position="outside" height="548px">
         <el-carousel-item v-for="(item,index) in carouselList" :key="index">
-          <img :src="item.imageAddress" alt="">
+          <img style="height:548px" :src="item.imageAddress" alt="">
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -35,7 +35,7 @@
 
     <div class="product_box">
       <ul class="product_tab flex">
-        <li v-for="(item,index) in productList" :key="index">Grow Light Fixture</li>
+        <li v-for="(item,index) in TabList" :class="tabIndex==index?'active':''" @mouseover="tabChange(item,index)" :key="index">{{item.classification}}</li>
       </ul>
       <div class="to_left slider_icon flex flex-vc flex-hc" @click="toTeft()">
         <a class="sPrev" href="javascript:void(0)"></a>
@@ -43,10 +43,10 @@
       <div class="to_right slider_icon flex flex-vc flex-hc" @click="toRight()">
         <a class="sNext" href="javascript:void(0)"></a>
       </div>
-      <div style="width:1150px;overflow: hidden;margin:auto">
+      <div style="width:1150px;overflow: hidden;margin:30px auto">
         <ul class="content-category-con-r" :style="sliderValue">
           <li class="product_item" v-for="(item,index) in productList" :key="index">
-            <img src="http://www.cn-hydroponics.com/uploadfile/2018/0116/20180116040404291.jpg " alt="">
+           <img :src="item.image" alt="">
 
           </li>
         </ul>
@@ -93,8 +93,11 @@ export default {
   data() {
     return {
       currIndex: 0,
-      productList: [{}, {}, {}, {}, {}, {}],
-      carouselList: []
+      productList: [],
+      TabList: [],
+      carouselList: [],
+      tabIndex: 0,
+      pageCurrent: 1
     }
   },
   computed: {
@@ -104,15 +107,50 @@ export default {
   },
   mounted() {
     let that = this
-
-    this.$axios.get('http://orcahrd.natapp1.cc/YaRui/index/findShuffling.do')
-      .then(function(res) {
-        console.log(res.data.shuffling)
-        that.carouselList = res.data.shuffling
-      })
-
+    this.getcarouselList(),
+      this.getTabList()
   },
   methods: {
+    //图片轮播
+    getcarouselList() {
+      let that = this
+      this.$axios.get('http://orcahrd.natapp1.cc/YaRui/index/findShuffling.do')
+        .then(function(res) {
+          that.carouselList = res.data.shuffling
+        })
+    },
+    //tab获取
+    getTabList() {
+      let that = this
+      this.$axios.get('http://orcahrd.natapp1.cc/YaRui/product/findProductCenter.do')
+        .then(function(res) {
+          that.TabList = res.data.productCenterList
+          that.getproductList()
+        })
+
+    },
+    //获取商品列表
+    getproductList(item) {
+      let that = this
+      console.log(item && item.id, 'id')
+      console.log(that.pageCurrent, 'that.pageCurrent')
+      this.$axios.get('http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do?', {
+        params: {
+          id: item && item.id || that.TabList[0].id,
+          pageCurrent: that.pageCurrent
+        }
+      })
+        .then(function(res) {
+          that.productList = res.data.data.records
+          console.log(res.data.data, "classification")
+        })
+    },
+
+    tabChange(item, index) {
+      this.tabIndex = index
+      this.getproductList(item)
+    },
+
     toTeft() {
       if (this.currIndex > 0) {
         this.currIndex--;
@@ -156,6 +194,7 @@ export default {
 
 .trotting-img {
   width: 100%;
+  text-align: center;
 }
 
 .el-carousel__item {
@@ -200,7 +239,9 @@ export default {
   a {
     display: block;
     height: 186px;
-    width: 170px; // &:hover {
+    width: 170px;
+    text-decoration: none;
+    // &:hover {
     //   background-color: #5DB661;
     //   p {
     //     color: #fff
@@ -254,8 +295,12 @@ export default {
       margin: 20px 40px;
       line-height: 24px;
     }
-    &:hover h5{color: #5DB661 }
-    &:hover p{color: #5DB661 }
+    &:hover h5 {
+      color: #5DB661
+    }
+    &:hover p {
+      color: #5DB661
+    }
   }
 }
 
@@ -360,17 +405,20 @@ export default {
     width: 1150px;
     margin: 20px auto;
     li {
-      padding: 20px 25px;
-      margin: 0 5px;
+      display: inline-block;
+      width: 190px;
+      margin: 0 2px;
+      height: 57px;
+      line-height: 57px;
       text-align: center;
       background: #efefef;
       cursor: pointer;
       font-size: 15px;
       color: #666;
-      &:hover {
-        background: #5db661;
-        color: #fff;
-      }
+    }
+    .active {
+      color: #fff;
+      background-color: #5DB661
     }
   }
 }

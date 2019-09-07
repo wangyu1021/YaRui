@@ -3,7 +3,7 @@
     <!--二级导航栏-->
     <div class="conter" v-show="this.$store.state.count" @mouseover="dianji()" @mouseout="dianjione()">
      <ul>
-     	 <li v-for="(item,index) in arr" @click="logan(item,index)">
+     	 <li v-for="(item,index) in arr" @click="logan(item,index)" :key="item.id">
           <span><a href="#">{{item.classification}}</a></span>
         </li>
      </ul>
@@ -20,7 +20,7 @@
       <!--左边导航栏-->
       <ul>
         <li>产品中心</li>
-        <li v-for="(item,index) in arr" @click="logan(item,index)">
+        <li v-for="(item,index) in arr" @click="logan(item,index)" :key="item.id">
           <span>{{item.classification}}</span>
         </li>
       </ul>
@@ -28,8 +28,8 @@
     <div class="conterone">
       <ul>
       
-        <li v-for="(time,index) in obje" @mouseover="show(index)" @mouseout="showone(index)">
-          <div :class="{active:tr&&index==current}"><router-link :to="{name:'ProductDetails'}">{{time.introduction}}</router-link></div>
+        <li v-for="(time,index) in obje" @mouseover="show(index)" @mouseout="showone(index)" :key="time.id" @click="loage(index)">
+          <div :class="{active:tr&&index==current}"><router-link :to="{name:'ProductDetails'}" tag="a">{{time.introduction}}</router-link></div>
          	<img :src="time.image" />
           <p>{{time.name}}</p>
         </li>
@@ -56,6 +56,13 @@ export default {
       tr:false,
       current:0,
       push:"",
+      currentone:null,
+      objeone:{
+      	image:'',
+      	introduction:'',
+      },
+      indexone:[],
+      nameone:null,
     }
   },
   mounted() {
@@ -77,6 +84,8 @@ export default {
             this.newuser.id = this.arrone[5];
             this.push=this.arr[0]
             this.newuser.pageCurrent = this.num
+            this.nameone=this.arr[0].classification
+    	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios.get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
                     pageCurrent: this.newuser.pageCurrent,
@@ -92,6 +101,8 @@ export default {
             this.newuser.id = this.arrone[4];
             this.push=this.arr[1]
             this.newuser.pageCurrent =  this.num
+                  this.nameone=this.arr[1].classification
+    	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
               .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
@@ -108,6 +119,8 @@ export default {
              this.newuser.id = this.arrone[3];
              this.push=this.arr[2]
             this.newuser.pageCurrent =  this.num
+                  this.nameone=this.arr[2].classification
+    	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
               .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
@@ -124,6 +137,8 @@ export default {
              this.newuser.id = this.arrone[2];
              this.push=this.arr[3]
             this.newuser.pageCurrent =  this.num
+                  this.nameone=this.arr[3].classification
+    	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
               .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
@@ -140,6 +155,8 @@ export default {
             this.newuser.id = this.arrone[1];
             this.push=this.arr[4]
             this.newuser.pageCurrent =  this.num
+                  this.nameone=this.arr[4].classification
+    	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
               .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
@@ -156,6 +173,8 @@ export default {
              this.newuser.id = this.arrone[0];
              this.push=this.arr[5]
             this.newuser.pageCurrent =  this.num
+                  this.nameone=this.arr[5].classification
+    	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
               .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
@@ -189,16 +208,24 @@ export default {
     	this.tr=false
     	this.current=null
     },
-   
+   loage:function(index){
+   	this.currentone=index
+   	if(this.currentone==index){
+   		this.objeone.image=this.obje[index].image
+   		this.objeone.introduction=this.obje[index].introduction
+			localStorage.setItem("details",JSON.stringify(this.objeone))
+			console.log(this.objeone)
+   	}
+   }
   }
-};
+}
 </script>
 
-
 <style scoped>
-
+a{text-decoration: none;}
 .navlet {
   padding-left: 80px;
+  cursor: pointer;
 }
 .navlet li {
   width: 270px;
@@ -222,6 +249,7 @@ export default {
 .conterone {
   width: 900px;
   height: 900px;
+  cursor: pointer;
 }
 .conterone a{display: none;}
 .conterone img{width:270px;height:190px;}
@@ -256,7 +284,7 @@ export default {
 .contertwo{display: flex;justify-content: space-around;}
 .active a{width:270px;height:190px;background-color: rgba(0,146,63,0.5);position: absolute;
 text-align: center;line-height:190px;color: rgb(255,255,255);display: block;font-size:15px;transition:0.4s ease-in-out;z-index:9999;}
-.radio{width:1200px;height:90px;margin-left:105px;}
+.radio{width:1200px;height:90px;margin-left:103px;}
 .radio a{color: rgb(51,51,51);}
 .radio ul{display: flex;line-height:90px;}
 </style>

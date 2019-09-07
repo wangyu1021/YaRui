@@ -67,6 +67,9 @@ export default {
     line-height: 60px;
     text-align: center;
     cursor: pointer;
+    font-size:18px;
+    font-weight: bold;
+    font-family: arial;
 }
 
 .content {
@@ -81,10 +84,11 @@ export default {
 
 .content ul li a {
    color: rgb(254, 255, 254);
-   
+   text-decoration: none;
 }
 
 .navigation {
     background-color: #4CB050;
+    height: 61px;
 }
 </style>
