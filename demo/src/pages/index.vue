@@ -45,9 +45,11 @@
       </div>
       <div style="width:1150px;overflow: hidden;margin:30px auto">
         <ul class="content-category-con-r" :style="sliderValue">
-          <li class="product_item" v-for="(item,index) in productList" :key="index">
-           <img :src="item.image" alt="">
-
+          <li class="product_item" v-for="(item,index) in productList.records" @click="rtproDet(item, index)"  @mouseover="show(index)" @mouseout="showone(index)"  :key="index">
+             <img :src="item.image" alt=""   >
+            <div :class="{active1:tr&&index==current}">
+              <a href="javascript">{{item.introduction}}</a>
+            </div>
           </li>
         </ul>
       </div>
@@ -80,7 +82,7 @@
           <h6>请及时与我们联系，我们会有人来处理。</h6>
         </div>
         <div class="link" style="line-height: 140px;margin-top: 58px;">
-          <router-link to="/relationUs">联系我们 &nbsp;+</router-link>
+          <router-link to="/Home/relationUs">联系我们 &nbsp;+</router-link>
         </div>
       </div>
     </div>
@@ -97,7 +99,9 @@ export default {
       TabList: [],
       carouselList: [],
       tabIndex: 0,
-      pageCurrent: 1
+      pageCurrent: 1,
+      tr: false,
+      current: 0,
     }
   },
   computed: {
@@ -106,9 +110,8 @@ export default {
     }
   },
   mounted() {
-    let that = this
     this.getcarouselList(),
-      this.getTabList()
+    this.getTabList()
   },
   methods: {
     //图片轮播
@@ -116,6 +119,7 @@ export default {
       let that = this
       this.$axios.get('http://orcahrd.natapp1.cc/YaRui/index/findShuffling.do')
         .then(function(res) {
+          console.log(res.data.shuffling,'res.data')
           that.carouselList = res.data.shuffling
         })
     },
@@ -132,17 +136,14 @@ export default {
     //获取商品列表
     getproductList(item) {
       let that = this
-      console.log(item && item.id, 'id')
-      console.log(that.pageCurrent, 'that.pageCurrent')
       this.$axios.get('http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do?', {
         params: {
           id: item && item.id || that.TabList[0].id,
-          pageCurrent: that.pageCurrent
+          pageCurrent: item && item.id ||that.pageCurrent
         }
       })
         .then(function(res) {
-          that.productList = res.data.data.records
-          console.log(res.data.data, "classification")
+          that.productList = res.data.data
         })
     },
 
@@ -162,12 +163,23 @@ export default {
       if (this.currIndex < length - 1) {
         this.currIndex++;
       }
+    },
+    show(index) {
+      this.tr = true
+      this.current = index
+    },
+    showone() {
+      this.tr = false
+      this.current = null
+    },
+    rtproDet(item, index) {
+      console.log(this.productList.pageCurrent,'this.productList.pageCurrent111')
+      console.log(item.id,'item.id')
+     this.$router.push({ path: '/Home/productDetails', query: { pageCurrent:this.productList.pageCurrent,id:item.productcenterId } });
     }
   }
 }
 </script>
-
-
 <style scoped lang="less">
 @keyframes mymove {
   from {
@@ -187,23 +199,34 @@ export default {
   float: left;
   margin: 0 13px;
   text-align: center;
+      line-height: 190px;
   img {
     width: 100%;
+    height: 100%;
   }
-}
+  .active1 {
+    width: 270px;
+    height: 190px;
+    background-color: rgba(0, 146, 63, 0.5);
+    position: absolute;
+    line-height: 190px;
+    top: 0;
+    left: 0;
+  }
 
-.trotting-img {
-  width: 100%;
-  text-align: center;
-}
+  .trotting-img {
+    width: 100%;
+    text-align: center;
+  }
 
-.el-carousel__item {
-  img {
-    color: #475669;
-    font-size: 18px;
-    opacity: 0.75;
-    line-height: 584px;
-    margin: 0;
+  .el-carousel__item {
+    img {
+      color: #475669;
+      font-size: 18px;
+      opacity: 0.75;
+      line-height: 584px;
+      margin: 0;
+    }
   }
 }
 
@@ -231,20 +254,19 @@ export default {
   height: 186px;
   margin: 28px 63px;
   transition: 0.1s;
+
   p {
     padding: 125px 0 0 0;
     font-size: 18px;
     color: #666666;
+    &:hover {
+      color: #62BB69
+    }
   }
   a {
     display: block;
     height: 186px;
-    width: 170px; // &:hover {
-    //   background-color: #5DB661;
-    //   p {
-    //     color: #fff
-    //   }
-    // }
+    width: 170px;
   }
   .list3 {
     background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_05.jpg) no-repeat center 31px;
@@ -301,6 +323,7 @@ export default {
     }
   }
 }
+
 
 .main-box {
   width: 1200px;

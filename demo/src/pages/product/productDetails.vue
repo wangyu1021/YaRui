@@ -1,10 +1,10 @@
 <template>
     <div class="main-details">
         <div class="ios-nav"></div>
-        <h4>OE-CMH630W生长灯具</h4>
+        <h4>{{arr.name}}</h4>
         <div class="pro-detail-con flex flex-hs">
             <div class="detail-le">
-                <img src="http://www.cn-hydroponics.com/uploadfile/2018/0119/20180119032622715.jpg">
+                <img :src="arr.image">
             </div>
             <div class="detail-ri">
                 <div class="detail-top" @click="toTop()"></div>
@@ -26,7 +26,7 @@
                 <span>CMH950W生长灯具</span>
             </p>
             <div class="tbody-im">
-                <img src="http://www.cn-hydroponics.com/uploadfile/2018/0119/20180119032622715.jpg">
+                <img :src="arr.introductionImage">
             </div>
         </div>
         <div class="detail">
@@ -39,9 +39,11 @@ export default {
     data() {
         return {
             detailIndex: 0,
-            detaillist: [{}, {}, {}]
+            detaillist: [],
+            arr:{},
         }
     },
+    mounted() { this.productDetlist() },
     methods: {
         toTop() {
             if (this.detailIndex > 0) {
@@ -54,6 +56,22 @@ export default {
             if (this.detailIndex < length - 1) {
                 this.detailIndex++;
             }
+        },
+        productDetlist() {
+            let that = this
+            this.$axios.get('http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do?', {
+                params: {
+                    pageCurrent: that.$route.query.pageCurrent,
+                    id: that.$route.query.id
+                }
+            })
+                .then(function(res) {
+                    that.detaillist = res.data.data.records
+                    console.log(res.data.data.records)
+                    for(let i of that.detaillist){
+                        that.arr=i
+                    }
+                })
         }
     },
     computed: {
@@ -109,13 +127,13 @@ export default {
                 top: 640px;
                 right: 0px;
                 width: 170px;
-                height: 40px;
+                height: 45px;
                 z-index: 999;
+                margin-bottom: -3px;
             }
             .detail-main {
                 height: 600px;
                 width: 170px;
-                overflow: hidden;
                 float: left;
                 margin-top: 65px;
                 transition: all 2s;
