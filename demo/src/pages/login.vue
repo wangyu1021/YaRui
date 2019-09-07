@@ -1,14 +1,20 @@
 <template>
-  <div class="login-container">
+ <div>
+   
+    <div class="login-container">
     <div class="login-top">
-          <el-card header="登录" class="login-card">
-            
-      <el-form @submit.native.prevent="login">
-        <el-form-item label="用户名">
+      <el-card header="登录" class="login-card">
+     <el-form @submit.native.prevent="login">
+      <div style="color:red;" v-show="this.error.errors">{{this.error.errors}}</div>
+      <el-form-item label="用户名">
           <el-input  v-model="model.username" placeholder="请输入用户名"></el-input>
-        </el-form-item>
+       <div class="prompt"  v-show="this.error.nameerr"><i>{{this.error.nameerr}}</i></div>
+
+         </el-form-item>
         <el-form-item label="密码">
           <el-input type="password" v-model="model.password" placeholder="请输入密码"></el-input>
+            <i class="prompt"   v-if="this.error.passworderr">{{this.error.passworderr}}</i>
+
         </el-form-item>
         <el-form-item>
           <el-button type="primary" native-type="submit">登录</el-button>
@@ -22,28 +28,65 @@
     </div>
 
   </div>
+ </div>
 </template>
 <script>
 export default {
   data(){
     return {
-      model: {}
+      model: {
+        username:"",
+        password:""
+      },
+        error: {
+        nameerr: "",
+        passworderr: "",
+        errors: ""
+      }
     }
   },
   methods: {
      login(){
-       this.$axios.post("http://orcahrd.natapp1.cc/YaRui/user/dologin.do",this.model).then((res)=>{
-         console.log(res)
+        if (this.model.username == "") {
+        this.error.nameerr = "用户名不能为空";
+        return false;
+      } else {
+        this.error.nameerr = "";
+      }
+      if (this.model.password == "") {
+        this.error.passworderr = "密码不能为空";
+        return false;
+      } else {
+        this.error.passworderr = "";
+      }
+       this.$axios.post("http://orcahrd.natapp1.cc/YaRui/user/login.do",{
+         name:this.model.username,
+         password:this.model.password
+       }).then((res)=>{
+          if (res.data.state == 0) {
+            if (res.data.message) {
+              this.error.errors = res.data.message;
+            }
+          } else {
+            this.$message({
+              type: "success",
+              message: "登录成功"
+            });
+           this.$store.state.show = false;
+            console.log( this.$store.state.show)
+            this.$router.push("/");
+          }
        })
      }
-  }
+  },
+ 
 }
 </script>
 
 <style>
+
 .login-container{
- 
-  background: url("http://www.cn-hydroponics.com/uploadfile/2018/0102/20180102071532429.jpg");
+  background: url("http://www.cn-hydroponics.com/uploadfile/2018/0102/20180102071532429.jpg")-136px 1px;
   height: 702px;
   display: flex;
   justify-content: flex-end;
@@ -54,6 +97,11 @@ export default {
   border: none;
   border-radius:8%;
   background: gainsboro;
+  position: relative;
+}
+.prompt{
+  color: rgb(218, 39, 39);
+  position: absolute;
 }
 .login-card .radio{
   margin-left: 40px;
@@ -83,5 +131,6 @@ export default {
     font-size: 18px;
     text-align: center;
     margin-left: 81px;
+    margin-top: 10px;
 }
 </style>

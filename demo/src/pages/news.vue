@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div class="box_a" v-for="item in boxList" :key="item.id">
+    <div class="box_a" v-for="item in boxList" :key="item.id" @click="btn1(i)">
       <div class="box_a-">
         <router-link to="/Home/newss">
           <img
@@ -52,8 +52,18 @@ export default {
           timess: "由管理员 - 2018 - 03 - 19",
           filess: "让你的成长室成为植物天堂"
         }
-      ]
+      ],
+      pageCurrent:1
     };
+  },
+  created() {
+    this.$axios.get("http://orcahrd.natapp1.cc/YaRui/findProductByProductCenterId.do",{
+      params:{
+        pageCurrent:this.pageCurrent
+      },
+    }).then((res)=>{
+      console.log(res)
+    })
   },
  
 };

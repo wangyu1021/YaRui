@@ -1,84 +1,99 @@
 <template>
   <div class="register-container">
     <div class="register-top">
-          <el-card header="请先注册" class="login-card">
-      <el-form @submit.native.prevent="register">
-        <el-form-item label="用户名">
-          <el-input  v-model="model.username" placeholder="请输入用户名"></el-input>
-        </el-form-item>
-        <el-form-item label="密码">
-          <el-input type="password" v-model="model.password" placeholder="请输入密码"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" native-type="submit">注册</el-button>
-           <span class="radio">
-             <router-link to="/login">返回登录</router-link>
-           </span>
-        </el-form-item>
-        
-      </el-form>
-    </el-card>
+      <el-card header="请先注册" class="login-card">
+        <el-form @submit.native.prevent="register">
+          <div style="color:red;" v-show="this.error.errors">{{this.error.errors}}</div>
+          <el-form-item label="用户名">
+            <el-input typr="text" v-model="user.username" placeholder="请输入用户名"></el-input>
+            <div class="prompt" v-show="this.error.nameerr"><i>{{this.error.nameerr}}</i> </div>
+          </el-form-item>
+          <el-form-item label="密码">
+            <el-input type="password" v-model="user.password" placeholder="请输入密码"></el-input>
+            <i  class="prompt" v-if="this.error.passworderr">{{this.error.passworderr}}</i>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" native-type="submit">注册</el-button>
+            <span class="radio">
+              <router-link to="/login">返回登录</router-link>
+            </span>
+          </el-form-item>
+        </el-form>
+      </el-card>
     </div>
-
   </div>
 </template>
 <script>
 export default {
-  data(){
+  data() {
     return {
-      model:{
-        username:"",
-        password:""
-
+      user: {
+        username: "",
+        password: ""
       },
-      error:{}
-    }
+      error: {
+        nameerr: "",
+        passworderr: "",
+        errors: ""
+      }
+    };
   },
   methods: {
-     register(){
-       this.$axios.get("http://orcahrd.natapp1.cc/YaRui/user/doRegister.do",
-       {
-        // params:{
-        //      name:this.model.username,
-        //      password:this.model.password
-        // }
-       })
-       .then((res)=> {
-          console.log(res.data)
+    register() {
+      if (this.user.username == "") {
+        this.error.nameerr = "用户名不能为空";
+        return false;
+      } else {
+        this.error.nameerr = "";
+      }
+      if (this.user.password == "") {
+        this.error.passworderr = "密码不能为空";
+        return false;
+      } else {
+        this.error.passworderr = "";
+      }
+      this.$axios
+        .post("http://orcahrd.natapp1.cc/YaRui/user/doRegister.do", {
+          name: this.user.username,
+          password: this.user.password
+        })
+        .then(res => {
           if (res.data.state == 0) {
-              this.$message({
+            if (res.data.message) {
+              this.error.errors = res.data.message;
+            }
+          } else {
+            this.$message({
               type: "success",
-              message: "注册成功"
+              message: "注册成功 已跳转登陆页面  请登录"
             });
             this.$router.push("/login");
-          } else {
-            this.error = res.data.message
-            console.log(this.error)
           }
-         
         });
-       
-     }
+    }
   }
-}
+};
 </script>
 
 <style>
-.register-container{
- 
-  background: url("http://www.cn-hydroponics.com/uploadfile/2018/0102/20180102071532429.jpg");
+.register-container {
+  background: url("http://www.cn-hydroponics.com/uploadfile/2018/0102/20180102071551498.jpg")-136px 1px;
   height: 702px;
   display: flex;
   justify-content: flex-end;
 }
-.login-card{
+.login-card {
   width: 25rem;
   /* margin: 5rem auto; */
   border: none;
-  border-radius:8%;
+  border-radius: 8%;
   background: gainsboro;
 }
-.register-top{
+.prompt{
+  color: rgb(218, 39, 39);
+  position: absolute;
+}
+.register-top {
   width: 500px;
   height: 100%;
   background: rgba(134, 124, 124, 0.6);
@@ -86,25 +101,26 @@ export default {
   align-items: center;
   justify-content: center;
 }
-.el-input__inner{
-  border-radius:8px;
+.el-input__inner {
+  border-radius: 8px;
 }
 .el-button--primary {
-    color: #FFF;
-    background-color: #409EFF;
-    border-color: #409EFF;
-    /* margin-left: 75px; */
-    width: 45%;
-    font-size: 18px;
-    text-align: center;
-    margin-left: 81px;
+  color: #fff;
+  background-color: #409eff;
+  border-color: #409eff;
+  /* margin-left: 75px; */
+  width: 45%;
+  font-size: 18px;
+  text-align: center;
+  margin-left: 81px;
+  margin-top: 10px;
 }
-.login-card .radio{
+.login-card .radio {
   margin-left: 40px;
   color: rgb(97, 97, 97);
   cursor: pointer;
 }
-.radio:hover{
+.radio:hover {
   color: rgb(170, 44, 44);
 }
 </style>

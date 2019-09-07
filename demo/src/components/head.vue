@@ -7,8 +7,8 @@
       
       <div class="ge">
         
-        <router-link class="login" to="/login">登录</router-link>
-        <router-link class="login" to="/register">注册</router-link>
+        <router-link v-show="this.$store.state.show" class="login" to="/login">登录</router-link>
+        <router-link v-show="this.$store.state.show" class="login" to="/register">注册</router-link>
 
 
        
@@ -35,7 +35,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  
+};
 </script>
 
 <style scoped>

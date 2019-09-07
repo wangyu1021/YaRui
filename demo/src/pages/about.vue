@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="about">
+    <div class="about" v-for="item in fleit" :key="item.id">
       <div class="about-top">
         <div class="conten">
           <div class="conten-left">
@@ -10,11 +10,7 @@
               <div class="conten-left-all">
                 <div class="line"></div>
                 <div class="line-right">
-                  位于广东省深圳市龙岗中心区和中国香港澳门湾区。NSR占地面积近3600平方米。
-                  我们是一家专业和经验丰富的生产植物生长设备和套件的制造商
-                  ，如：各种植物生长灯具，植物生长碳空气过滤器，绳索棘轮，植物生长风扇，
-                  五金配件等。NSR拥有一批专业，经验丰富的研发团队
-                  和生产团队。
+                    {{item.introduction}}
                 </div>
               </div>
             </div>
@@ -42,9 +38,7 @@
             <div class="heights">
               <h3>{{footTitle}}</h3>
               <div class="title-file">
-                开拓创新，与时俱进，创造一流产品。NSR人员努力超越客户的满意度并努力工作。始终坚持：信誉第一，质量第一
-                ，服务第一为我们的目标，致力于为所有客户提供最满意的服务。真诚欢迎您来NSR参观和洽谈业务。我们愿以优质的产
-                品和一流的服务回报您的信任，与您共创新的辉煌！
+              {{item.direction}}
               </div>
               <div class="Imgss">
                 <div class="file file-a">
@@ -93,14 +87,15 @@ export default {
   
       fleit: []
     };
-  }
-  //  created() {
-  //    this.$axios.get("http://orcahrd.natapp1.cc/YaRui/enterprise/findInformation.do").then((res)=>{
-  //      this.fleit = res.data.informationList
-  //     //  console.log( this.fleit)
+  },
+   created() {
+     this.$axios.get("http://orcahrd.natapp1.cc/YaRui/enterprise/findInformation.do").then((res)=>{
+     console.log(res.data)
 
-  //    })
-  //  },
+       this.fleit = res.data.informationList
+       console.log( this.fleit)
+     })
+   },
 };
 </script>
 
