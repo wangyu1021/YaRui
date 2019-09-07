@@ -24,4 +24,7 @@ export default {
   list-style-type: none;
   text-decoration: none;
 }
+a{
+  text-decoration: none;
+}
 </style>

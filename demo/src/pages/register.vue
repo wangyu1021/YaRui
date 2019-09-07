@@ -78,7 +78,7 @@ export default {
 <style>
 .register-container {
   background: url("http://www.cn-hydroponics.com/uploadfile/2018/0102/20180102071551498.jpg")-136px 1px;
-  height: 702px;
+  height: 610px;
   display: flex;
   justify-content: flex-end;
 }

@@ -77,7 +77,6 @@ export default {
 <style scoped>
 .us {
   background: url("http://www.cn-hydroponics.com/statics/huidaxin/images/contact-bg_02.jpg");
-  margin: -16px 0px 0 0;
   height: 690px;
   display: flex;
   align-items: center;

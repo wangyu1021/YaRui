@@ -73,7 +73,6 @@ export default {
               message: "登录成功"
             });
            this.$store.state.show = false;
-            console.log( this.$store.state.show)
             this.$router.push("/");
           }
        })
@@ -87,7 +86,7 @@ export default {
 
 .login-container{
   background: url("http://www.cn-hydroponics.com/uploadfile/2018/0102/20180102071532429.jpg")-136px 1px;
-  height: 702px;
+  height: 610px;
   display: flex;
   justify-content: flex-end;
 }

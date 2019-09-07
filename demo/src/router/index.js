@@ -9,8 +9,10 @@ const News = resolve => require(["../pages/news.vue"], resolve);
 const Product = resolve => require(["../pages/product.vue"], resolve);
 const RelationUs = resolve => require(["../pages/relationUs.vue"], resolve);
 const Index = resolve => require(["../pages/index.vue"], resolve);
-const ProductDetails = resolve =>
-    require(["../pages/product/productDetails.vue"], resolve);
+const ProductDetails = resolve => require(["../pages/product/productDetails.vue"], resolve);
+const ProductDetailss = resolve => require(["../pages/product/productDetailss.vue"], resolve);
+
+    
 const newss = resolve => require(["../pages/News/newss.vue"], resolve);
 const newsss = resolve => require(["../pages/News/newsss.vue"], resolve);
 const login = resolve => require(["../pages/login.vue"], resolve);
@@ -63,6 +65,11 @@ export default new Router({
                     path: "productDetails",
                     name: "ProductDetails",
                     component: ProductDetails
+                },
+                {
+                    path: "productDetailss",
+                    name: "ProductDetailss",
+                    component: ProductDetailss
                 },
 
                 {

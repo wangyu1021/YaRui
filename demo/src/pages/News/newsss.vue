@@ -80,7 +80,7 @@ export default {
 }
 .container-center {
   width: 100%;
-  height: 884px;
+  height: 767px;
   margin-top: 137px;
 }
 .title {

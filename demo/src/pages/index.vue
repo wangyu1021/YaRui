@@ -1,14 +1,15 @@
 <template>
   <div class="home">
     <div class="trotting-img">
-      <el-carousel indicator-position="outside" height="548px">
-        <el-carousel-item v-for="(item,index) in carouselList" :key="index">
-          <img style="height:548px" :src="item.imageAddress" alt="">
-        </el-carousel-item>
-      </el-carousel>
+      <div class="IMG">
+        <el-carousel indicator-position="outside" height="548px">
+          <el-carousel-item v-for="(item,index) in carouselList" :key="index">
+            <img style="height:548px" :src="item.imageAddress" alt />
+          </el-carousel-item>
+        </el-carousel>
+      </div>
     </div>
     <div class="content-al">
-
       <div class="wrap flex">
         <div class="wrap-list">
           <a class="list1" href="javascript">
@@ -35,7 +36,12 @@
 
     <div class="product_box">
       <ul class="product_tab flex">
-        <li v-for="(item,index) in TabList" :class="tabIndex==index?'active':''" @mouseover="tabChange(item,index)" :key="index">{{item.classification}}</li>
+        <li
+          v-for="(item,index) in TabList"
+          :class="tabIndex==index?'active':''"
+          @mouseover="tabChange(item,index)"
+          :key="index"
+        >{{item.classification}}</li>
       </ul>
       <div class="to_left slider_icon flex flex-vc flex-hc" @click="toTeft()">
         <a class="sPrev" href="javascript:void(0)"></a>
@@ -45,8 +51,15 @@
       </div>
       <div style="width:1150px;overflow: hidden;margin:30px auto">
         <ul class="content-category-con-r" :style="sliderValue">
-          <li class="product_item" v-for="(item,index) in productList.records" @click="rtproDet(item, index)"  @mouseover="show(index)" @mouseout="showone(index)"  :key="index">
-             <img :src="item.image" alt=""   >
+          <li
+            class="product_item"
+            v-for="(item,index) in productList.records"
+            @click="rtproDet(item, index)"
+            @mouseover="show(index)"
+            @mouseout="showone(index)"
+            :key="index"
+          >
+            <img :src="item.image" alt />
             <div :class="{active1:tr&&index==current}">
               <a href="javascript">{{item.introduction}}</a>
             </div>
@@ -58,22 +71,21 @@
     <div class="main-con">
       <div class="main-box flex">
         <div class="main-list">
-          <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024507603.png" alt="">
+          <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024507603.png" alt />
           <h5>质量保证</h5>
           <p>每个生产细节都有专业的质量控制。</p>
         </div>
         <div class="main-list">
-          <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024530537.png" alt="">
+          <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024530537.png" alt />
           <h5>非常棒的服务</h5>
           <p>专业的客户服务24小时在线为您解决任何问题</p>
         </div>
         <div class="main-list">
-          <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024545396.png" alt="">
-          <h5> 专业制造商</h5>
+          <img src="http://www.cn-hydroponics.com/uploadfile/2018/0109/20180109024545396.png" alt />
+          <h5>专业制造商</h5>
           <p>拥有经验丰富的设计，研究和生产团队的专业生长灯具制造商。</p>
         </div>
       </div>
-
     </div>
     <div class="main-bottom">
       <div class="txt flex">
@@ -91,7 +103,6 @@
 
 <script>
 export default {
-
   data() {
     return {
       currIndex: 0,
@@ -101,8 +112,8 @@ export default {
       tabIndex: 0,
       pageCurrent: 1,
       tr: false,
-      current: 0,
-    }
+      current: 0
+    };
   },
   computed: {
     sliderValue() {
@@ -110,85 +121,100 @@ export default {
     }
   },
   mounted() {
-    this.getcarouselList(),
-    this.getTabList()
+    this.getcarouselList(), this.getTabList();
   },
   methods: {
     //图片轮播
     getcarouselList() {
-      let that = this
-      this.$axios.get('http://orcahrd.natapp1.cc/YaRui/index/findShuffling.do')
+      let that = this;
+      this.$axios
+        .get("http://orcahrd.natapp1.cc/YaRui/index/findShuffling.do")
         .then(function(res) {
-          console.log(res.data.shuffling,'res.data')
-          that.carouselList = res.data.shuffling
-        })
+          console.log(res.data.shuffling, "res.data");
+          that.carouselList = res.data.shuffling;
+        });
     },
     //tab获取
     getTabList() {
-      let that = this
-      this.$axios.get('http://orcahrd.natapp1.cc/YaRui/product/findProductCenter.do')
+      let that = this;
+      this.$axios
+        .get("http://orcahrd.natapp1.cc/YaRui/product/findProductCenter.do")
         .then(function(res) {
-          that.TabList = res.data.productCenterList
-          that.getproductList()
-        })
-
+          that.TabList = res.data.productCenterList;
+          that.getproductList();
+        });
     },
     //获取商品列表
     getproductList(item) {
-      let that = this
-      this.$axios.get('http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do?', {
-        params: {
-          id: item && item.id || that.TabList[0].id,
-          pageCurrent: item && item.id ||that.pageCurrent
-        }
-      })
+      let that = this;
+      this.$axios
+        .get(
+          "http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do?",
+          {
+            params: {
+              id: (item && item.id) || that.TabList[0].id,
+              pageCurrent: (item && item.id) || that.pageCurrent
+            }
+          }
+        )
         .then(function(res) {
-          that.productList = res.data.data
-        })
+          that.productList = res.data.data;
+        });
     },
 
     tabChange(item, index) {
-      this.tabIndex = index
-      this.getproductList(item)
+      this.tabIndex = index;
+      this.getproductList(item);
     },
 
     toTeft() {
       if (this.currIndex > 0) {
         this.currIndex--;
       }
-
     },
     toRight() {
-      const length = this.productList.length
+      const length = this.productList.length;
       if (this.currIndex < length - 1) {
         this.currIndex++;
       }
     },
     show(index) {
-      this.tr = true
-      this.current = index
+      this.tr = true;
+      this.current = index;
     },
     showone() {
-      this.tr = false
-      this.current = null
+      this.tr = false;
+      this.current = null;
     },
     rtproDet(item, index) {
-      console.log(this.productList.pageCurrent,'this.productList.pageCurrent111')
-      console.log(item.id,'item.id')
-     this.$router.push({ path: '/Home/productDetails', query: { pageCurrent:this.productList.pageCurrent,id:item.productcenterId } });
+      console.log(
+        this.productList.pageCurrent,
+        "this.productList.pageCurrent111"
+      );
+      console.log(item.id, "item.id");
+      this.$router.push({
+        path: "/Home/productDetailss",
+        query: {
+          pageCurrent: this.productList.pageCurrent,
+          id: item.productcenterId
+        }
+      });
     }
   }
-}
+};
 </script>
 <style scoped lang="less">
+a {
+  text-decoration: none;
+}
 @keyframes mymove {
   from {
     opacity: 0;
-    transform: translateY(150px)
+    transform: translateY(150px);
   }
   to {
     opacity: 1;
-    transform: translateY(0px)
+    transform: translateY(0px);
   }
 }
 
@@ -199,7 +225,7 @@ export default {
   float: left;
   margin: 0 13px;
   text-align: center;
-      line-height: 190px;
+  line-height: 190px;
   img {
     width: 100%;
     height: 100%;
@@ -234,14 +260,13 @@ export default {
   background-color: #99a9bf;
 }
 
-.el-carousel__item:nth-child(2n+1) {
+.el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
 }
 
 .el-carousel .el-carousel__container {
   height: 548px;
 }
-
 
 .content-al {
   width: 1200px;
@@ -260,7 +285,7 @@ export default {
     font-size: 18px;
     color: #666666;
     &:hover {
-      color: #62BB69
+      color: #62bb69;
     }
   }
   a {
@@ -269,24 +294,26 @@ export default {
     width: 170px;
   }
   .list3 {
-    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_05.jpg) no-repeat center 31px;
+    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_05.jpg)
+      no-repeat center 31px;
   }
 
-
   .list1 {
-    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_03.jpg) no-repeat center 31px;
+    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_03.jpg)
+      no-repeat center 31px;
     z-index: 999;
   }
 
   .list2 {
-    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_13.jpg) no-repeat center 31px;
+    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_13.jpg)
+      no-repeat center 31px;
   }
 
   .list4 {
-    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_11.jpg) no-repeat center 31px;
+    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_11.jpg)
+      no-repeat center 31px;
   }
 }
-
 
 .main-con {
   height: 450px;
@@ -299,7 +326,7 @@ export default {
     margin: 0 15px;
     text-align: center;
     animation-name: mymove;
-    animation-duration: .8s;
+    animation-duration: 0.8s;
     img {
       margin-top: -47px;
     }
@@ -316,20 +343,18 @@ export default {
       line-height: 24px;
     }
     &:hover h5 {
-      color: #5DB661
+      color: #5db661;
     }
     &:hover p {
-      color: #5DB661
+      color: #5db661;
     }
   }
 }
-
 
 .main-box {
   width: 1200px;
   margin: auto;
 }
-
 
 .main-bottom {
   height: 140px;
@@ -342,7 +367,7 @@ export default {
     padding-left: 84px;
     background: url(../assets/imgs/question_03.jpg) no-repeat left 45px;
     animation-name: mymove;
-    animation-duration: .8s;
+    animation-duration: 0.8s;
     p {
       display: block;
       font-size: 18px;
@@ -354,7 +379,6 @@ export default {
     }
   }
 }
-
 
 .link a {
   font-size: 18px;
@@ -439,8 +463,15 @@ export default {
     }
     .active {
       color: #fff;
-      background-color: #5DB661
+      background-color: #5db661;
     }
   }
+  
 }
+.IMG{
+   text-align: center;
+  }
+  a{
+        color: #fff;
+  }
 </style>

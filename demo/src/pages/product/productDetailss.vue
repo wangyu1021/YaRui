@@ -1,22 +1,24 @@
 <template>
     <div class="main-details">
-        <div class="ios-nav">
+                <div class="ios-nav">
         	<ul>
         		<li><router-link :to="{name:'Index'}" tag="a">首页 > </router-link></li>
 				<li><router-link :to="{name:'Product'}" tag="a">产品中心 > </router-link></li>
 				<li>{{arrone}}</li>
         	</ul>
         </div>
-      <h4>{{arr.introduction}}</h4>
+        <h4>{{arr.name}}</h4>
         <div class="pro-detail-con flex flex-hs">
             <div class="detail-le">
-              <img :src="arr.image" />
+                <img :src="arr.image">
             </div>
             <div class="detail-ri">
                 <div class="detail-top" @click="toTop()"></div>
                 <div class="detail-main" :style="slider">
                     <ul>
-                        <li><img :src="arr.image"></li>
+                        <li v-for="(item,index) in detaillist" :key="index">
+                            <img :src="item.image" alt="">
+                        </li>
                     </ul>
                 </div>
                 <div class="detail-bott" @click="toBottom()"></div>
@@ -30,7 +32,7 @@
                 <span>CMH950W生长灯具</span>
             </p>
             <div class="tbody-im">
-                <img :src="arr.image" />
+                <img :src="arr.introductionImage">
             </div>
         </div>
         <div class="detail">
@@ -43,29 +45,11 @@ export default {
     data() {
         return {
             detailIndex: 0,
-            detaillist: [{}, {}, {}],
-        	obje:{},
-        	arr:{
-        	image:null,
-        	introduction:null,
-        	},
-        	name:{},
+            detaillist: [],
+            arr:{},
         }
     },
-    mounted(){
-   	if(location.href.indexOf('#reloaded')==-1){
-    location.href=location.href+"#reloaded";
-    location.reload();
-    }
-    	this.obje=JSON.parse(localStorage.getItem("details"))
-    	this.name=JSON.parse(localStorage.getItem("nameone"))
-    	this.arr=this.obje
-    	this.arrone=this.name
-        console.log("执行了")	
-    	
-    		
-    	
-    },
+    mounted() { this.productDetlist() },
     methods: {
         toTop() {
             if (this.detailIndex > 0) {
@@ -79,13 +63,28 @@ export default {
                 this.detailIndex++;
             }
         },
+        productDetlist() {
+            let that = this
+            this.$axios.get('http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do?', {
+                params: {
+                    pageCurrent: that.$route.query.pageCurrent,
+                    id: that.$route.query.id
+                }
+            })
+                .then(function(res) {
+                    that.detaillist = res.data.data.records
+                    console.log(res.data.data.records)
+                    for(let i of that.detaillist){
+                        that.arr=i
+                    }
+                })
+        }
     },
     computed: {
         slider() {
             return "transform:translateY(" + -(this.detailIndex * 144) + "px)";
         }
-    },
-  
+    }
 
 }
 </script>
@@ -133,13 +132,13 @@ export default {
                 top: 640px;
                 right: 0px;
                 width: 170px;
-                height: 40px;
+                height: 45px;
                 z-index: 999;
+                margin-bottom: -3px;
             }
             .detail-main {
                 height: 600px;
                 width: 170px;
-                overflow: hidden;
                 float: left;
                 margin-top: 65px;
                 transition: all 2s;

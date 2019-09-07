@@ -28,8 +28,8 @@
     <div class="conterone">
       <ul>
       
-        <li v-for="(time,index) in obje" @mouseover="show(index)" @mouseout="showone(index)" :key="time.id">
-          <div :class="{active:tr&&index==current}"><router-link :to="{name:'ProductDetails'}">{{time.introduction}}</router-link></div>
+        <li v-for="(time,index) in obje" @mouseover="show(index)" @mouseout="showone(index)" :key="time.id" @click="loage(index)">
+          <div :class="{active:tr&&index==current}"><router-link :to="{name:'ProductDetails'}" tag="a">{{time.introduction}}</router-link></div>
          	<img :src="time.image" />
           <p>{{time.name}}</p>
         </li>
@@ -56,6 +56,13 @@ export default {
       tr:false,
       current:0,
       push:"",
+      currentone:null,
+      objeone:{
+      	image:'',
+      	introduction:'',
+      },
+      indexone:[],
+      nameone:null,
     }
   },
   mounted() {
@@ -67,35 +74,35 @@ export default {
         .get("http://orcahrd.natapp1.cc/YaRui/product/findProductCenter.do")
         .then(res => {
           this.arr = res.data.productCenterList;
-          for (let i of this.arr) {  //循环分类列表
+          for (let i of this.arr) {
           }
-          for (let y of this.arr) {  //循环商品id
-            this.arrone.unshift(y.id);  //想要拿到数据得话必须要获取到对应得id
+          for (let y of this.arr) {
+            this.arrone.unshift(y.id);
           }
-          if (index == 0) { //通过index判断是点击的哪一个 
+          if (index == 0) {
             const _this = this;
-            this.newuser.id = this.arrone[5]; //通过id获取商品信息
-            this.push=this.arr[0]  //面包屑导航栏
-            this.newuser.pageCurrent = this.num //页码，默认为第一页
+            this.newuser.id = this.arrone[5];
+            this.push=this.arr[0]
+            this.newuser.pageCurrent = this.num
+            this.nameone=this.arr[0].classification
+    	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios.get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
-                    pageCurrent: this.newuser.pageCurrent,  //页码默认获取到第一页得商品信息
-                    id: this.newuser.id //把获取到得id传到后台以便获取到商品信息
+                    pageCurrent: this.newuser.pageCurrent,
+                    id: this.newuser.id
                   }
                 }
               )
               .then(res => {
-                this.obje = res.data.data.records;  //打点拿到数据
+                this.obje = res.data.data.records;
                 console.log(res.data.data.records);
               });
-          } 
-          
-          
-      
-          else if (index == 1) {
+          } else if (index == 1) {
             this.newuser.id = this.arrone[4];
             this.push=this.arr[1]
             this.newuser.pageCurrent =  this.num
+                  this.nameone=this.arr[1].classification
+    	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
               .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
@@ -108,15 +115,12 @@ export default {
                 this.obje = res.data.data.records;
                 console.log(res.data.data.records);
               });
-          } 
-          
-          
-          
-          
-          else if (index == 2) {
+          } else if (index == 2) {
              this.newuser.id = this.arrone[3];
              this.push=this.arr[2]
             this.newuser.pageCurrent =  this.num
+                  this.nameone=this.arr[2].classification
+    	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
               .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
@@ -129,14 +133,12 @@ export default {
                 this.obje = res.data.data.records;
                 console.log(res.data.data.records);
               });
-          }
-          
-          
-          
-          else if (index == 3) {
+          } else if (index == 3) {
              this.newuser.id = this.arrone[2];
              this.push=this.arr[3]
             this.newuser.pageCurrent =  this.num
+                  this.nameone=this.arr[3].classification
+    	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
               .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
@@ -149,15 +151,12 @@ export default {
                 this.obje = res.data.data.records;
                 console.log(res.data.data.records);
               });
-          } 
-          
-          
-          
-          
-          else if (index == 4) {
+          } else if (index == 4) {
             this.newuser.id = this.arrone[1];
             this.push=this.arr[4]
             this.newuser.pageCurrent =  this.num
+                  this.nameone=this.arr[4].classification
+    	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
               .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
@@ -170,15 +169,12 @@ export default {
                 this.obje = res.data.data.records;
                 console.log(res.data.data.records);
               });
-          }
-          
-          
-          
-          
-          else {
+          } else {
              this.newuser.id = this.arrone[0];
              this.push=this.arr[5]
             this.newuser.pageCurrent =  this.num
+                  this.nameone=this.arr[5].classification
+    	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
               .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
                   params: {
@@ -198,11 +194,6 @@ export default {
           console.log("错误");
         });
     },
-   //获取商品详情代码  --end
-
-
-
-    //点击显示隐藏代码
     dianji:function(){
     	this.$store.state.count=true
     },
@@ -217,16 +208,24 @@ export default {
     	this.tr=false
     	this.current=null
     },
-   
+   loage:function(index){
+   	this.currentone=index
+   	if(this.currentone==index){
+   		this.objeone.image=this.obje[index].image
+   		this.objeone.introduction=this.obje[index].introduction
+			localStorage.setItem("details",JSON.stringify(this.objeone))
+			console.log(this.objeone)
+   	}
+   }
   }
-};
+}
 </script>
 
-
 <style scoped>
-
+a{text-decoration: none;}
 .navlet {
   padding-left: 80px;
+  cursor: pointer;
 }
 .navlet li {
   width: 270px;
@@ -250,6 +249,7 @@ export default {
 .conterone {
   width: 900px;
   height: 900px;
+  cursor: pointer;
 }
 .conterone a{display: none;}
 .conterone img{width:270px;height:190px;}
@@ -284,7 +284,7 @@ export default {
 .contertwo{display: flex;justify-content: space-around;}
 .active a{width:270px;height:190px;background-color: rgba(0,146,63,0.5);position: absolute;
 text-align: center;line-height:190px;color: rgb(255,255,255);display: block;font-size:15px;transition:0.4s ease-in-out;z-index:9999;}
-.radio{width:1200px;height:90px;margin-left:158px;}
+.radio{width:1200px;height:90px;margin-left:103px;}
 .radio a{color: rgb(51,51,51);}
 .radio ul{display: flex;line-height:90px;}
 </style>
