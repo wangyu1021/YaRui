@@ -1,11 +1,15 @@
 <template>
     <div class="ins-main">
-        <div class="breadcrumb">
-            <el-breadcrumb separator-class="el-icon-arrow-right">
-                <el-breadcrumb-item :to="{ path: '/' }">主页</el-breadcrumb-item>
-                <el-breadcrumb-item :to="{ path: '/joinUs' }">加入我们</el-breadcrumb-item>
-            </el-breadcrumb>
-        </div>
+    <div class="ios-nav">
+      <ul>
+        <li>
+          <router-link :to="{name:'Index'}" tag="a">首页 > </router-link>
+        </li>
+        <li>
+          <router-link :to="{name:'JoinUs'}" tag="a">加入我们 > </router-link>
+        </li>
+      </ul>
+    </div>
         <div class="tit">
             <h4>{{arr.title}}</h4>
             <p>薪酬：
@@ -205,5 +209,20 @@ export default {
             }
         }
     }
+}
+.ios-nav ul {
+  display: flex;
+  line-height: 90px;
+}
+
+.ios-nav li a {
+  color: black;
+}
+
+.ios-nav {
+  height: 90px;
+}
+a {
+  text-decoration: none;
 }
 </style>
