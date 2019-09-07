@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yarui.dao.ProductCenterDao">
+	<select id="selectProductCenter"
+		resultType="com.yarui.pojo.ProductCenter">
+		select * from product_center;
+	</select>
+	
+	<insert id="insertProductCenter" parameterType="String">
+		insert into product_center(classification) values (#{classification});
+	</insert>
+	
+</mapper>

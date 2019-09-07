@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yarui.dao.RecruitmentsDao">
+	<select id="selectRecruitment"
+		resultType="com.yarui.pojo.Recruitment">
+		select id,min_salary as minSalary,max_salary as
+		maxSalary,title,content,requirements,address,level,type,position,education,number,created_time
+		as createdTime from recruitment
+	</select>
+	<select id="getRows" resultType="int">
+		select count(*) from recruitment
+	</select>
+</mapper>
