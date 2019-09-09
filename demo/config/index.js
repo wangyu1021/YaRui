@@ -18,7 +18,7 @@ module.exports = {
         context: [ //代理路径
             '/YaRui/enterprise',
         ],
-        proxypath: 'http://orcahrd.natapp1.cc',
+        proxypath: 'http://www.orchardteam.com',
         // CSS Sourcemaps off by default because relative paths are "buggy"
         // with this option, according to the CSS-Loader README
         // (https://github.com/webpack/css-loader#sourcemaps)

@@ -65,7 +65,7 @@ export default {
         },
         productDetlist() {
             let that = this
-            this.$axios.get('http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do?', {
+            this.$axios.get('http://www.orchardteam.com/YaRui/product/findProductByProductCenterId.do?', {
                 params: {
                     pageCurrent: that.$route.query.pageCurrent,
                     id: that.$route.query.id

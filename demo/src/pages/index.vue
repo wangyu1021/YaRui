@@ -36,12 +36,7 @@
 
     <div class="product_box">
       <ul class="product_tab flex">
-        <li
-          v-for="(item,index) in TabList"
-          :class="tabIndex==index?'active':''"
-          @mouseover="tabChange(item,index)"
-          :key="index"
-        >{{item.classification}}</li>
+        <li v-for="(item,index) in TabList" :class="tabIndex==index?'active':''" @mouseover="tabChange(item,index)" :key="index">{{item.classification}}</li>
       </ul>
       <div class="to_left slider_icon flex flex-vc flex-hc" @click="toTeft()">
         <a class="sPrev" href="javascript:void(0)"></a>
@@ -51,14 +46,7 @@
       </div>
       <div style="width:1150px;overflow: hidden;margin:30px auto">
         <ul class="content-category-con-r" :style="sliderValue">
-          <li
-            class="product_item"
-            v-for="(item,index) in productList.records"
-            @click="rtproDet(item, index)"
-            @mouseover="show(index)"
-            @mouseout="showone(index)"
-            :key="index"
-          >
+          <li class="product_item" v-for="(item,index) in productList.records" @click="rtproDet(item, index)" @mouseover="show(index)" @mouseout="showone(index)" :key="index">
             <img :src="item.image" alt />
             <div :class="{active1:tr&&index==current}">
               <a href="javascript">{{item.introduction}}</a>
@@ -128,7 +116,7 @@ export default {
     getcarouselList() {
       let that = this;
       this.$axios
-        .get("http://orcahrd.natapp1.cc/YaRui/index/findShuffling.do")
+        .get("http://www.orchardteam.com/YaRui/index/findShuffling.do")
         .then(function(res) {
           console.log(res.data.shuffling, "res.data");
           that.carouselList = res.data.shuffling;
@@ -138,7 +126,7 @@ export default {
     getTabList() {
       let that = this;
       this.$axios
-        .get("http://orcahrd.natapp1.cc/YaRui/product/findProductCenter.do")
+        .get("http://www.orchardteam.com/YaRui/product/findProductCenter.do")
         .then(function(res) {
           that.TabList = res.data.productCenterList;
           that.getproductList();
@@ -148,14 +136,13 @@ export default {
     getproductList(item) {
       let that = this;
       this.$axios
-        .get(
-          "http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do?",
-          {
-            params: {
-              id: (item && item.id) || that.TabList[0].id,
-              pageCurrent: (item && item.id) || that.pageCurrent
-            }
+        .get("http://www.orchardteam.com/YaRui/product/findProductByProductCenterId.do?",
+        {
+          params: {
+            id: (item && item.id) || that.TabList[0].id,
+            pageCurrent: (item && item.id) || that.pageCurrent
           }
+        }
         )
         .then(function(res) {
           that.productList = res.data.data;
@@ -207,6 +194,7 @@ export default {
 a {
   text-decoration: none;
 }
+
 @keyframes mymove {
   from {
     opacity: 0;
@@ -294,24 +282,20 @@ a {
     width: 170px;
   }
   .list3 {
-    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_05.jpg)
-      no-repeat center 31px;
+    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_05.jpg) no-repeat center 31px;
   }
 
   .list1 {
-    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_03.jpg)
-      no-repeat center 31px;
+    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_03.jpg) no-repeat center 31px;
     z-index: 999;
   }
 
   .list2 {
-    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_13.jpg)
-      no-repeat center 31px;
+    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_13.jpg) no-repeat center 31px;
   }
 
   .list4 {
-    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_11.jpg)
-      no-repeat center 31px;
+    background: url(http://www.cn-hydroponics.com/statics/huidaxin/images/icon4_11.jpg) no-repeat center 31px;
   }
 }
 
@@ -466,12 +450,13 @@ a {
       background-color: #5db661;
     }
   }
-  
 }
-.IMG{
-   text-align: center;
-  }
-  a{
-        color: #fff;
-  }
+
+.IMG {
+  text-align: center;
+}
+
+a {
+  color: #fff;
+}
 </style>

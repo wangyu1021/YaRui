@@ -71,7 +71,7 @@ export default {
   methods: {
     logan: function(item, index) {
       this.$axios
-        .get("http://orcahrd.natapp1.cc/YaRui/product/findProductCenter.do")
+        .get("http://www.orchardteam.com/YaRui/product/findProductCenter.do")
         .then(res => {
           this.arr = res.data.productCenterList;
           for (let i of this.arr) {
@@ -86,7 +86,7 @@ export default {
             this.newuser.pageCurrent = this.num
             this.nameone=this.arr[0].classification
     	localStorage.setItem("nameone",JSON.stringify(this.nameone))
-            this.$axios.get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
+            this.$axios.get("http://www.orchardteam.com/YaRui/product/findProductByProductCenterId.do",{
                   params: {
                     pageCurrent: this.newuser.pageCurrent,
                     id: this.newuser.id
@@ -104,7 +104,7 @@ export default {
                   this.nameone=this.arr[1].classification
     	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
-              .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
+              .get("http://www.orchardteam.com/YaRui/product/findProductByProductCenterId.do",{
                   params: {
                     pageCurrent: this.newuser.pageCurrent,
                     id: this.newuser.id
@@ -122,7 +122,7 @@ export default {
                   this.nameone=this.arr[2].classification
     	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
-              .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
+              .get("http://www.orchardteam.com/YaRui/product/findProductByProductCenterId.do",{
                   params: {
                     pageCurrent: this.newuser.pageCurrent,
                     id: this.newuser.id
@@ -140,7 +140,7 @@ export default {
                   this.nameone=this.arr[3].classification
     	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
-              .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
+              .get("http://www.orchardteam.com/YaRui/product/findProductByProductCenterId.do",{
                   params: {
                     pageCurrent: this.newuser.pageCurrent,
                     id: this.newuser.id
@@ -158,7 +158,7 @@ export default {
                   this.nameone=this.arr[4].classification
     	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
-              .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
+              .get("http://www.orchardteam.com/YaRui/product/findProductByProductCenterId.do",{
                   params: {
                     pageCurrent: this.newuser.pageCurrent,
                     id: this.newuser.id
@@ -176,7 +176,7 @@ export default {
                   this.nameone=this.arr[5].classification
     	localStorage.setItem("nameone",JSON.stringify(this.nameone))
             this.$axios
-              .get("http://orcahrd.natapp1.cc/YaRui/product/findProductByProductCenterId.do",{
+              .get("http://www.orchardteam.com/YaRui/product/findProductByProductCenterId.do",{
                   params: {
                     pageCurrent: this.newuser.pageCurrent,
                     id: this.newuser.id
