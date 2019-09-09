@@ -89,7 +89,7 @@ export default {
     };
   },
    created() {
-     this.$axios.get("http://www.orchardteam.com/YaRui/enterprise/findInformation.do").then((res)=>{
+     this.$axios.get("http://www.orchardteam.com/enterprise/findInformation.do").then((res)=>{
      console.log(res.data)
 
        this.fleit = res.data.informationList

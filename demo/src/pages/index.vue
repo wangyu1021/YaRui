@@ -116,7 +116,7 @@ export default {
     getcarouselList() {
       let that = this;
       this.$axios
-        .get("http://www.orchardteam.com/YaRui/index/findShuffling.do")
+        .get("http://www.orchardteam.com/index/findShuffling.do")
         .then(function(res) {
           console.log(res.data.shuffling, "res.data");
           that.carouselList = res.data.shuffling;
@@ -126,7 +126,7 @@ export default {
     getTabList() {
       let that = this;
       this.$axios
-        .get("http://www.orchardteam.com/YaRui/product/findProductCenter.do")
+        .get("http://www.orchardteam.com/product/findProductCenter.do")
         .then(function(res) {
           that.TabList = res.data.productCenterList;
           that.getproductList();
@@ -136,7 +136,7 @@ export default {
     getproductList(item) {
       let that = this;
       this.$axios
-        .get("http://www.orchardteam.com/YaRui/product/findProductByProductCenterId.do?",
+        .get("http://www.orchardteam.com/product/findProductByProductCenterId.do?",
         {
           params: {
             id: (item && item.id) || that.TabList[0].id,

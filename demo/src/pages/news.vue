@@ -57,7 +57,7 @@ export default {
     };
   },
   created() {
-    this.$axios.get("http://www.orchardteam.com/YaRui/findProductByProductCenterId.do",{
+    this.$axios.get("http://www.orchardteam.com/findProductByProductCenterId.do",{
       params:{
         pageCurrent:this.pageCurrent
       },

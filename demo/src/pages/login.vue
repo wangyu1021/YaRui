@@ -59,7 +59,7 @@ export default {
       } else {
         this.error.passworderr = "";
       }
-       this.$axios.post("http://www.orchardteam.com/YaRui/user/login.do",{
+       this.$axios.post("http://www.orchardteam.com/user/login.do",{
          name:this.model.username,
          password:this.model.password
        }).then((res)=>{

@@ -55,7 +55,7 @@ export default {
   methods: {
     getTabList() {
       let that = this
-      this.$axios.get('http://www.orchardteam.com/YaRui/recruitments/findRecruitment.do')
+      this.$axios.get('http://www.orchardteam.com/recruitments/findRecruitment.do')
         .then(function(res) {
           that.joinlist = res.data.data
           console.log(res.data.data, 'res.data')

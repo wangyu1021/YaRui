@@ -53,7 +53,7 @@ export default {
         this.error.passworderr = "";
       }
       this.$axios
-        .post("http://www.orchardteam.com/YaRui/user/doRegister.do", {
+        .post("http://www.orchardteam.com/user/doRegister.do", {
           name: this.user.username,
           password: this.user.password
         })
